@@ -92,3 +92,5 @@ Este archivo contiene tres hojas:
 - Captura del webhook configurado en GitHub.
 - Captura del pipeline en Jenkins en estado exitoso.
 - Captura del artefacto Excel generado.
+
+Actualización para validar webhook automático desde GitHub hacia Jenkins.
