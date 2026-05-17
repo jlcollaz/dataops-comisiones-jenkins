@@ -20,8 +20,16 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                sh 'mkdir -p output'
-                sh 'docker run --rm -v $WORKSPACE/output:/app/output dataops-comisiones:latest'
+                sh '''
+                    rm -rf output
+                    mkdir -p output
+
+                    docker rm -f dataops-comisiones-run || true
+                    docker create --name dataops-comisiones-run dataops-comisiones:latest
+                    docker start -a dataops-comisiones-run
+                    docker cp dataops-comisiones-run:/app/output/comisiones_calculadas.xlsx output/comisiones_calculadas.xlsx
+                    docker rm dataops-comisiones-run
+                '''
             }
         }
 
@@ -41,7 +49,7 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline ejecutado correctamente. Artefacto Excel generado.'
+            echo 'Pipeline ejecutado correctamente. Artefacto Excel generado y archivado.'
         }
         failure {
             echo 'El pipeline falló. Revisar logs de Jenkins.'
