@@ -1,0 +1,20 @@
+# Entornos Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Archivos generados
+output/*.xlsx
+output/*.csv
+
+# Variables y secretos
+EmpleadoSql.sql
+.env
+*.pem
+*.key
+secrets/
+
+# Sistema
+.DS_Store
+Thumbs.db
